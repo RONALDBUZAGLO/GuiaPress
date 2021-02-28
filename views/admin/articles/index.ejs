@@ -1,0 +1,56 @@
+<%- include('../../partials/header'); %>
+<%- include('../../partials/navbar'); %>
+<div class="container">
+    <hr>
+    <h2>Artigos</h2>
+    <a class="btn btn-success" href="/admin/articles/new">Criar novo artigo</a>
+    <hr>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>TÍTULO</th>
+                <th>SLUG</th>
+                <th>CATEGORIA</th>
+                <th>AÇÕES</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <% articles.forEach(articles =>{ %>
+                <tr>
+                    <td><%= articles.id %></td>
+                    <td><%= articles.title %></td>
+                    <td><%= articles.slug %></td>
+                    <td><%= articles.category.title %></td>
+                    <td>
+
+                        <a href="/admin/articles/edit/<%= articles.id %>" class="btn btn-warning">Editar</a> 
+
+                        <form method="POST" action="/articles/delete" style="display:inline " onsubmit="deleteConfirm(event,this)">
+                            <input type="hidden" name="id" value=" <%= articles.id %> ">
+                            <button class="btn btn-danger">Deletar</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('../../partials/footer'); %>
+
+<script>
+function deleteConfirm(event,form){
+
+    event.preventDefault();
+    // console.log("o formulário não foi enviado!")
+    var decision = confirm("Você quer deletar este artigo?");
+    if(decision){
+        // console.log("Eu quero deletar!");
+        form.submit();
+    }else{
+        console.log("Não quero deletar, foi um acidente!");
+    }
+}
+</script>

@@ -1,0 +1,41 @@
+<%- include('partials/header'); %>
+<%- include('partials/homenavbar'); %>
+<body>
+    
+    <div class="container mt-3">
+        <a href="admin/categories/new"><button class="btn btn-primary">NOVA CATEGORIA</button></a>
+        <a href="admin/categories"><button class="btn btn-primary">CATEGORIAS</button></a>
+        <a href="admin/articles/new"><button class="btn btn-primary">NOVO ARTIGO</button></a>
+        <a href="admin/articles"><button class="btn btn-primary">ARTIGOS</button></a>
+        <a href="login"><button class="btn btn-primary">LOGIN</button></a>
+        <a href="logout"><button class="btn btn-primary">LOGOUT</button></a>
+
+        <div class="jumbotron">
+            <h1 class="display-4">Bem vindo!</h1>
+            <p class="lead">Este é um modelo simples de blog</p>
+            <hr class="my-4">
+            <p>Aqui pode ficar uma descrição simples sobre o blog</p>
+            <a class="btn btn-primary btn-lg" href="articles/page/0" role="button">Ler mais</a>
+          </div>
+        <% articles.forEach(article =>{ %>
+            <div class="card">
+                <div class="card-header">
+                    <h2><%= article.title %></h2>
+                </div>
+                <div class="card-body">
+                    <a href="/<%= article.slug %>" class="btn btn-success">Ler Artigo</a>
+                </div>
+            </div>
+            <br>
+        <% }) %>
+
+        <div class="row">
+            <div class="col col-12">
+                <a href="articles/page/1" style="float:right">Next>>></a>
+            </div>
+            <hr>
+        </div>
+        <hr>
+    </div>
+</body>
+<%- include('partials/footer'); %>
